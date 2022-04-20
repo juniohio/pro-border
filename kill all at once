@@ -1,0 +1,18 @@
+local LP = game.Players.LocalPlayer
+while wait() do
+for _,player in pairs(game.Players:GetPlayers()) do
+coroutine.wrap(function()
+    if player ~= LP and player then
+        local character = player.Character
+        --print("char =", char, "; LPchar =", LPchar, "; character = ", character)
+        if character and LP.Character and not (character.Humanoid.Health <= 0) and not (character.HumanoidRootPart.Position.Z < -700) and character:FindFirstChild("HumanoidRootPart") then
+            local start_time = tick()
+            repeat
+            LP.Character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame * CFrame.new(0,0,math.random(-5,5))
+            game:GetService('RunService').Heartbeat:Wait()
+            until (tick() - start_time) > 1 or not LP.Character or not character or not character.Humanoid or character.Humanoid.Health <= 0 or character.HumanoidRootPart.Position.Z < -700 or character:FindFirstChild("ForceField") or not LP.Character:FindFirstChild("HumanoidRootPart") or not character:FindFirstChild("HumanoidRootPart")
+        end
+    end
+end)()
+end
+end
